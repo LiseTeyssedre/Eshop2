@@ -2,6 +2,7 @@ package fr.adaming.dao;
 
 import java.util.List;
 
+import org.apache.commons.codec.binary.Base64;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import fr.adaming.model.Categorie;
+
 
 @Repository
 public class CategorieDaoImpl implements ICategorieDao {
@@ -35,8 +37,15 @@ public class CategorieDaoImpl implements ICategorieDao {
 		Session s = sf.getCurrentSession();
 
 		Query query = s.createQuery(req);
+		
+		//Cela te permet de transformer ton tableau byte en image url
+		//"data:image/png;base64,"=format
+		List<Categorie> listecat=query.list();
+		for(Categorie cat:listecat){
+			cat.setImagecat("data:image/png;base64," + Base64.encodeBase64String(cat.getPhotoCat()));
+		}
 
-		return query.list();
+		return listecat;
 	}
 
 	@Override
