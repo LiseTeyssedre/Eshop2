@@ -17,40 +17,41 @@ import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 import fr.adaming.service.IProduitService;
 
-@ManagedBean(name="prodMB")
+@ManagedBean(name = "prodMB")
 @RequestScoped
-public class ProduitManagedBean implements Serializable{
+public class ProduitManagedBean implements Serializable {
 
-	//transformation de l'association uml en java
+	// transformation de l'association uml en java
 	@ManagedProperty("#{prodService}")
 	private IProduitService produitService;
 
-	//setter pour l'injection de dependance
+	// setter pour l'injection de dependance
 	public void setProduitService(IProduitService produitService) {
 		this.produitService = produitService;
 	}
-	
-	//Attributs
+
+	// Attributs
 	private Produit produit;
 	private List<Produit> listeProduits;
 	private HttpSession maSession;
 	private UploadedFile uf;
 	private Categorie categorie;
 
-	//Constructeur vide
+	// Constructeur vide
 	public ProduitManagedBean() {
 		this.produit = new Produit();
+		this.categorie = new Categorie();
 	}
-	
+
 	@PostConstruct
-	public void init(){
+	public void init() {
 		this.listeProduits = produitService.getAllProduits();
 		this.maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-		//ajout de la liste de tous les produits dans la session
+		// ajout de la liste de tous les produits dans la session
 		maSession.setAttribute("prodListe", listeProduits);
 	}
 
-	//Getters et setters
+	// Getters et setters
 	public Produit getProduit() {
 		return produit;
 	}
@@ -82,7 +83,7 @@ public class ProduitManagedBean implements Serializable{
 	public void setUf(UploadedFile uf) {
 		this.uf = uf;
 	}
-	
+
 	public Categorie getCategorie() {
 		return categorie;
 	}
@@ -91,12 +92,12 @@ public class ProduitManagedBean implements Serializable{
 		this.categorie = categorie;
 	}
 
-	//Methodes metiers
-	//ajouter un produit dans la BDD
-	public String ajouterProduit(){
+	// Methodes metiers
+	// ajouter un produit dans la BDD
+	public String ajouterProduit() {
 		produit.setPhotoProd(this.uf.getContents());
 		Produit prodAjout = produitService.addProduit(produit, categorie);
-		
+
 		if (prodAjout.getId() != 0) {
 
 			// recuperer la liste de clients
@@ -104,7 +105,7 @@ public class ProduitManagedBean implements Serializable{
 
 			// metre a jour la liste dans la session
 			maSession.setAttribute("prodListe", liste);
-			
+
 			return "gestionProduits";
 		} else {
 
@@ -114,5 +115,44 @@ public class ProduitManagedBean implements Serializable{
 
 		}
 	}
+
+	public String supprimerProduit() {
+		int verif = produitService.deleteProduit(produit);
+		if (verif != 0) {
+			// recuperer la liste de clients
+			List<Produit> liste = produitService.getAllProduits();
+			// mettre a jour la liste dans la session
+			maSession.setAttribute("prodListe", liste);
+			return "gestionProduits";
+		} else {
+
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("le produit n'a pas été supprimé"));
+			return "supprimerProduit";
+		}
+	}
+
+	public String modifierProduit() {
+		produit.setPhotoProd(this.uf.getContents());
+		int verif = produitService.updateProduit(produit, categorie);
+
+		if (verif != 0) {
+			// recuperer la liste de clients
+			List<Produit> liste = produitService.getAllProduits();
+
+			// metre a jour la liste dans la session
+			maSession.setAttribute("prodListe", liste);
+			return "gestionProduits";
+		} else {
+			// le messag een cas dechec
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("le produit n'est pas modifier"));
+			return "modifierProduit";
+		}
+	}
 	
+	public void rechercherProduit(){
+		Produit pOut = produitService.getProduitById(produit);
+		//mettre le produit dans la session
+		maSession.setAttribute("prodSession", pOut);
+		
+	}
 }

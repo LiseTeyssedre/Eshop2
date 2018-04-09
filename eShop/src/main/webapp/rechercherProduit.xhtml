@@ -1,0 +1,67 @@
+<!DOCTYPE html >
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+	<title>Page rechercherProduit</title>
+</h:head>
+<h:body>
+
+	<h:form>
+		<p:breadCrumb>
+			<p:menuitem value="Accueil" url="gestionProduits.xhtml" />
+			<p:menuitem value="Ajouter" url="ajouterProduit.xhtml" />
+			<p:menuitem value="Supprimer" url="supprimerProduit.xhtml" />
+			<p:menuitem value="Modifier" url="modifierProduit.xhtml" />
+			<p:menuitem value="Rechercher" url="rechercherProduit.xhtml" />
+
+		</p:breadCrumb>
+	</h:form>
+
+	<h:form>
+
+		<h:panelGrid columns="2">
+			ID du produit recherché: <h:inputText value="#{prodMB.produit.id}" />
+			<h:commandButton value="Rechercher"
+				action="#{prodMB.rechercherProduit}" />
+		</h:panelGrid>
+	</h:form>
+	<h:form>
+		<p:dataTable var="prod" value="#{sessionScope.prodSession}">
+			<f:facet name="header">Produit recherché</f:facet>
+			<p:column headerText="Id">
+				<h:outputText value="#{prod.id}" />
+			</p:column>
+
+			<p:column headerText="Designation">
+				<h:outputText value="#{prod.designation}" />
+			</p:column>
+
+			<p:column headerText="Description">
+				<h:outputText value="#{prod.description}" />
+			</p:column>
+			<p:column headerText="Prix">
+				<h:outputText value="#{prod.prix}" />
+			</p:column>
+
+			<p:column headerText="Quantite">
+				<h:outputText value="#{prod.quantite}" />
+			</p:column>
+
+			<p:column headerText="Id Categorie">
+				<h:outputText value="#{prod.categorie.idCategorie}" />
+			</p:column>
+
+			<p:column headerText="Photo du produit">
+				<h:graphicImage value="#{prod.image}" />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+
+</h:body>
+</html>
