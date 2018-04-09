@@ -15,6 +15,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "produits")
@@ -30,10 +31,10 @@ public class Produit implements Serializable {
 	private String description;
 	private double prix;
 	private int quantite;
-	@Column(columnDefinition = "TINYINT(1)")
-	private boolean selectionne;
 	@Lob
 	private byte[] photoProd;
+	@Transient
+	private String image;
 
 	// Transfo de l'assos Uml en Java avec Categorie
 	@ManyToOne
@@ -54,26 +55,22 @@ public class Produit implements Serializable {
 		super();
 	}
 
-	public Produit(String designation, String description, double prix, int quantite, boolean selectionne,
-			byte[] photoProd) {
+	public Produit(String designation, String description, double prix, int quantite, byte[] photoProd) {
 		super();
 		this.designation = designation;
 		this.description = description;
 		this.prix = prix;
 		this.quantite = quantite;
-		this.selectionne = selectionne;
 		this.photoProd = photoProd;
 	}
 
-	public Produit(long id, String designation, String description, double prix, int quantite, boolean selectionne,
-			byte[] photoProd) {
+	public Produit(long id, String designation, String description, double prix, int quantite, byte[] photoProd) {
 		super();
 		this.id = id;
 		this.designation = designation;
 		this.description = description;
 		this.prix = prix;
 		this.quantite = quantite;
-		this.selectionne = selectionne;
 		this.photoProd = photoProd;
 	}
 
@@ -118,14 +115,6 @@ public class Produit implements Serializable {
 		this.quantite = quantite;
 	}
 
-	public boolean isSelectionne() {
-		return selectionne;
-	}
-
-	public void setSelectionne(boolean selectionne) {
-		this.selectionne = selectionne;
-	}
-
 	public byte[] getPhotoProd() {
 		return photoProd;
 	}
@@ -156,6 +145,14 @@ public class Produit implements Serializable {
 
 	public void setAgent(Agent agent) {
 		this.agent = agent;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 }
