@@ -93,6 +93,7 @@ public class CategorieManageBean implements Serializable {
 	
 	//Methodes metiers
 	//=====================Ajouter une categorie================//
+	
 	public String ajouterCategorie () {
 		
 		this.categorie.setPhotoCat(this.uf.getContents());
