@@ -33,6 +33,8 @@ public class CommandeDaoImpl implements ICommandeDao {
 		String req = "INSERT INTO Commande";
 		Session s = sf.getCurrentSession();
 		s.save(com);
+		
+		
 
 		return com;
 	}

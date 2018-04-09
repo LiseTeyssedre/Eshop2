@@ -13,6 +13,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "categories")
@@ -27,7 +28,8 @@ public class Categorie implements Serializable {
 	@Lob
 	private byte[] photoCat;
 	private String description;
-
+	@Transient
+	private String imagecat;
 	
 	// Transformation UML en java avec ligne de commande
 	@OneToMany(mappedBy="categorie")
@@ -98,8 +100,17 @@ public class Categorie implements Serializable {
 		this.listeProduit = listeProduit;
 	}
 
-	// Methode ToString
+	
 
+	public String getImagecat() {
+		return imagecat;
+	}
+
+	public void setImagecat(String imagecat) {
+		this.imagecat = imagecat;
+	}
+
+	// Methode ToString
 	@Override
 	public String toString() {
 		return "Categorie [idCategorie=" + idCategorie + ", nomCategorie=" + nomCategorie + ", photoCat=" + photoCat
