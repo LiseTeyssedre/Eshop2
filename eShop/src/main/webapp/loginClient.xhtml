@@ -7,18 +7,15 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <head>
-<TITLE>page de login admin</TITLE>
-
+<title>page de login client</title>
 </head>
-
 <body>
-
 
 <h:form>
 <p:panelGrid columns="2">
-Mail : <h:inputText value="#{aMB.agent.mail}"></h:inputText>
-Mot de Passe : <h:inputSecret value="#{aMB.agent.mdp}"></h:inputSecret>
-<h:commandButton value="Se Connecter" action="#{aMB.seConnecter}"/>
+Mail : <h:inputText value="#{clMB.client.email}"></h:inputText>
+Mot de Passe : <h:inputSecret value="#{clMB.client.mdp}"></h:inputSecret>
+<h:commandButton value="Se Connecter" action="#{clMB.seConnecter}"/>
 </p:panelGrid>
 
 </h:form>
@@ -28,8 +25,6 @@ Mot de Passe : <h:inputSecret value="#{aMB.agent.mdp}"></h:inputSecret>
 
 
 
-
-
-
 </body>
+
 </html>

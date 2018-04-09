@@ -2,6 +2,7 @@ package fr.adaming.managedBean;
 
 import java.io.Serializable;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -52,7 +53,8 @@ public class AgentManageBean implements Serializable{
 			
 			return "accueilAgent";
 		}else{
-			return "accueil";
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("authentification échouée"));
+			return "loginAgent";
 		}
 		
 	}
