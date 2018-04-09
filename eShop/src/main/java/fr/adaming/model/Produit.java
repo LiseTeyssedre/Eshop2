@@ -45,11 +45,6 @@ public class Produit implements Serializable {
 	@OneToMany(mappedBy = "produit")
 	private List<LigneCommande> listeLignecommande;
 
-	// Transfo de l'assos Uml en Java avec Agent
-	@ManyToOne
-	@JoinColumn(name = "a_id", referencedColumnName = "id_a")
-	private Agent agent;
-
 	// Constructeurs
 	public Produit() {
 		super();
@@ -137,14 +132,6 @@ public class Produit implements Serializable {
 
 	public void setListeLignecommande(List<LigneCommande> listeLignecommande) {
 		this.listeLignecommande = listeLignecommande;
-	}
-
-	public Agent getAgent() {
-		return agent;
-	}
-
-	public void setAgent(Agent agent) {
-		this.agent = agent;
 	}
 
 	public String getImage() {
