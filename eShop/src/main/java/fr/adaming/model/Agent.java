@@ -26,10 +26,6 @@ public class Agent implements Serializable{
 	
 	//Transformation uml en java
 	@OneToMany(mappedBy="agent")
-	private List<Produit> listeProduit;
-	@OneToMany(mappedBy="agent")
-	private List<Categorie> listeCetegorie;
-	@OneToMany(mappedBy="agent")
 	private List<Commande> listeCommande;
 	
 	
@@ -68,18 +64,7 @@ public class Agent implements Serializable{
 	public void setMdp(String mdp) {
 		this.mdp = mdp;
 	}
-	public List<Categorie> getListeCetegorie() {
-		return listeCetegorie;
-	}
-	public void setListeCetegorie(List<Categorie> listeCetegorie) {
-		this.listeCetegorie = listeCetegorie;
-	}
-	public List<Produit> getListeProduit() {
-		return listeProduit;
-	}
-	public void setListeProduit(List<Produit> listeProduit) {
-		this.listeProduit = listeProduit;
-	}
+	
 	public List<Commande> getListeCommande() {
 		return listeCommande;
 	}
