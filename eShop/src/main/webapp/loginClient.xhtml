@@ -6,25 +6,25 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-<head>
-<title>page de login client</title>
-</head>
-<body>
+<h:head>
+	<title>page de login client</title>
+</h:head>
+<h:body>
 
-<h:form>
-<p:panelGrid columns="2">
+	<h:form>
+		<p:panelGrid columns="2">
 Mail : <h:inputText value="#{clMB.client.email}"></h:inputText>
 Mot de Passe : <h:inputSecret value="#{clMB.client.mdp}"></h:inputSecret>
-<h:commandButton value="Se Connecter" action="#{clMB.seConnecter}"/>
-</p:panelGrid>
+			<h:commandButton value="Se Connecter" action="#{clMB.seConnecter}" />
+		</p:panelGrid>
 
-</h:form>
-
-
+	</h:form>
 
 
 
 
-</body>
+
+
+</h:body>
 
 </html>

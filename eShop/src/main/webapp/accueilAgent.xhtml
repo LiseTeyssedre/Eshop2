@@ -6,14 +6,41 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-<head>
+<h:head>
 <title>pas d'accueil admin</title>
-</head>
+</h:head>
 
-<body>
+<h:body>
 
 accueil admin
 
-</body>
+<h2>liste des clients</h2>
+
+<p:dataTable var="cl" value="#{sessionScope.clientListe}">
+    <p:column headerText="Id">
+        <h:outputText value="#{cl.id}" />
+    </p:column>
+ 
+    <p:column headerText="Nom">
+        <h:outputText value="#{cl.nom}" />
+    </p:column>
+ 
+   <p:column headerText="Mail">
+        <h:outputText value="#{cl.email}" />
+    </p:column>
+    
+    <p:column headerText="Adresse">
+        <h:outputText value="#{cl.adresse}" />
+    </p:column>
+    <p:column headerText="Nom">
+        <h:outputText value="#{cl.tel}" />
+    </p:column>
+</p:dataTable>
+
+
+
+
+
+</h:body>
 
 </html>

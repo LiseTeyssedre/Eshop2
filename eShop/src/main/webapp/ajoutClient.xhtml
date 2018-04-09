@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+<title>page d'ajout</title>
+</h:head>
+
+<h:body>
+
+
+
+<h:form>
+<p:panelGrid columns="2">
+Nom : <h:inputText value="#{clMB.client.nomClient}"></h:inputText>
+Adresse : <h:inputText value="#{clMB.client.adresse}"></h:inputText>
+Email : <h:inputText value="#{clMB.client.email}"></h:inputText>
+Mot de passe : <h:inputText value="#{clMB.client.mdp}"></h:inputText>
+Numéro de téléphone : <h:inputText value="#{clMB.client.tel}"></h:inputText>
+<h:commandButton value="Ajouter" action="#{clMB.ajouterClient}"/>
+</p:panelGrid>
+
+</h:form>
+
+
+
+
+
+
+
+
+
+</h:body>
+</html>

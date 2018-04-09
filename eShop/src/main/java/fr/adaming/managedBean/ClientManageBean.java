@@ -37,6 +37,8 @@ public class ClientManageBean implements Serializable {
 	public void init() {
 		maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		this.agent = (Agent) maSession.getAttribute("agentSession");
+		this.listeClient = clientService.getListClient();
+		maSession.setAttribute("clientListe", listeClient);
 	}
 
 	// Constructeur vide
@@ -77,6 +79,7 @@ public class ClientManageBean implements Serializable {
 		Client clOut = clientService.isExist(this.client);
 
 		if (clOut != null) {
+			
 			return "accueilClient";
 		} else {
 
@@ -84,23 +87,23 @@ public class ClientManageBean implements Serializable {
 			return "loginClient";
 		}
 	}
-	
-		//METHODE AJOUTER UN CLIENT
-	
-	public String ajouterClient(){
-		//appel de la méthode ajouter de client Service
+
+	// METHODE AJOUTER UN CLIENT
+
+	public String ajouterClient() {
+		// appel de la méthode ajouter de client Service
 		Client clOut = clientService.addClient(this.client);
-		
-		if(clOut.getIdClient()!=0){
-			//récupérer la liste de l'agent
+
+		if (clOut.getIdClient() != 0) {
+			// récupérer la liste de l'agent
 			listeClient = clientService.getListClient();
-			//l'envoyer dans la session
+			// l'envoyer dans la session
 			maSession.setAttribute("clientListe", listeClient);
-			
+
 			return "accueil";
-		}else{
+		} else {
 			return "ajoutClient";
 		}
-		
+
 	}
 }

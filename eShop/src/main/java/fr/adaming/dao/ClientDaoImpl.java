@@ -24,7 +24,7 @@ public class ClientDaoImpl implements IClientDao {
 	@Override
 	public Client isExist(Client cl) {
 		// la requete HQL
-		String req = "FROM Client as cl WHERE cl.mail=:pMail AND cl.mdp=:pMdp";
+		String req = "FROM Client as cl WHERE cl.email=:pMail AND cl.mdp=:pMdp";
 
 		// ouvrir une session
 		Session s = sf.getCurrentSession();
