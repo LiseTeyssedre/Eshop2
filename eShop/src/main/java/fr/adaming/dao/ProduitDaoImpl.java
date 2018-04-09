@@ -2,9 +2,11 @@ package fr.adaming.dao;
 
 import java.util.List;
 
+import org.apache.commons.codec.binary.Base64;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -33,7 +35,13 @@ public class ProduitDaoImpl implements IProduitDao{
 		s = sf.getCurrentSession();
 		q = s.createQuery(req);
 		q.setParameter("pIdCat", cat.getIdCategorie());
-		return q.list();
+		
+		List<Produit> listeOut = q.list();
+		for (Produit prod : listeOut) {
+			prod.setImage("data:image/png;base64," + Base64.encodeBase64String(prod.getPhotoProd()));
+
+		}
+		return listeOut;
 	}
 
 	@Override
@@ -41,7 +49,13 @@ public class ProduitDaoImpl implements IProduitDao{
 		String req = "FROM Produit";
 		s = sf.getCurrentSession();
 		q = s.createQuery(req);
-		return q.list();
+		q.list();
+		List<Produit> listeOut = q.list();
+		for (Produit prod : listeOut) {
+			prod.setImage("data:image/png;base64," + Base64.encodeBase64String(prod.getPhotoProd()));
+
+		}
+		return listeOut;
 	}
 
 	@Override
@@ -81,7 +95,9 @@ public class ProduitDaoImpl implements IProduitDao{
 		s = sf.getCurrentSession();
 		q = s.createQuery(req);
 		q.setParameter("pId", p.getId());
-		return (Produit) q.uniqueResult();
+		Produit pOut = (Produit) q.uniqueResult();
+		pOut.setImage("data:image/png;base64," + Base64.encodeBase64String(pOut.getPhotoProd()));
+		return pOut;
 	}
 
 }

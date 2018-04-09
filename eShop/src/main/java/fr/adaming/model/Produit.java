@@ -142,4 +142,10 @@ public class Produit implements Serializable {
 		this.image = image;
 	}
 
+	@Override
+	public String toString() {
+		return "Produit [id=" + id + ", designation=" + designation + ", description=" + description + ", prix=" + prix
+				+ ", quantite=" + quantite + ", categorie=" + categorie + "]";
+	}
+
 }
