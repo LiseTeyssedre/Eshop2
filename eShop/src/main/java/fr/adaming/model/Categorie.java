@@ -33,10 +33,7 @@ public class Categorie implements Serializable {
 	@OneToMany(mappedBy="categorie")
 	private List<Produit> listeProduit;
 	
-	//Transfo assos Uml en Java avec agent
-	@ManyToOne
-	@JoinColumn(name="a_id",referencedColumnName="id_a")
-	private Agent agent;
+	
 
 	
 
@@ -99,13 +96,6 @@ public class Categorie implements Serializable {
 
 	public void setListeProduit(List<Produit> listeProduit) {
 		this.listeProduit = listeProduit;
-	}
-	public Agent getAgent() {
-		return agent;
-	}
-
-	public void setAgent(Agent agent) {
-		this.agent = agent;
 	}
 
 	// Methode ToString
