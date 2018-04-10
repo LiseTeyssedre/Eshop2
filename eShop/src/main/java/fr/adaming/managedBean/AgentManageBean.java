@@ -33,17 +33,8 @@ public class AgentManageBean implements Serializable {
 	private Agent agent;
 	private List<Client> listeClient;
 	HttpSession maSession;
-	private Client client;
 
 	
-	// Init
-	@PostConstruct
-	public void init() {
-		maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-		this.agent = (Agent) maSession.getAttribute("agentSession");
-		maSession.setAttribute("clientListe", listeClient);
-	}
-
 	// Constructeur vide
 	public AgentManageBean() {
 		this.agent = new Agent();
@@ -76,7 +67,8 @@ public class AgentManageBean implements Serializable {
 			// définir l'agent comme attribut de la session
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("agentSession", aOut);
 
-			maSession.setAttribute("clientListe", listeClient);
+			//avoir la liste des clients dans la session 
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("clientList", this.listeClient);
 			
 			return "accueilAgent";
 		} else {

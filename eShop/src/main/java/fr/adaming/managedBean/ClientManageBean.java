@@ -80,7 +80,7 @@ public class ClientManageBean implements Serializable {
 
 		if (clOut != null) {
 			
-			return "accueilClient";
+			return "accueil";
 		} else {
 
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("authentification échouée"));
