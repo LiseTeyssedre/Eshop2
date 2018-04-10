@@ -3,6 +3,7 @@ package fr.adaming.managedBean;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -17,17 +18,18 @@ import org.primefaces.model.UploadedFileWrapper;
 
 import fr.adaming.model.Agent;
 import fr.adaming.model.Categorie;
+import fr.adaming.model.Produit;
 import fr.adaming.service.ICategorieService;
 
-@ManagedBean(name="catMB")
+@ManagedBean(name = "catMB")
 @RequestScoped
 public class CategorieManageBean implements Serializable {
 
-	//Transformation UML en Java
+	// Transformation UML en Java
 	@ManagedProperty("#{catService}")
 	private ICategorieService categorieService;
 
-	//Guetter et Setter
+	// Guetter et Setter
 	public ICategorieService getCategorieService() {
 		return categorieService;
 	}
@@ -35,29 +37,31 @@ public class CategorieManageBean implements Serializable {
 	public void setCategorieService(ICategorieService categorieService) {
 		this.categorieService = categorieService;
 	}
-	
-	//Attribut du ManageBean
+
+	// Attribut du ManageBean
 	private Categorie categorie;
 	private Agent agent;
 	private boolean indice;
 	private UploadedFile uf;
-	
-	HttpSession catSession;
+	private List<Categorie> listeCategorie;
+	private HttpSession maSession;
 
 	public CategorieManageBean() {
-		this.categorie=new Categorie();
-		this.indice=false;
-		this.uf=new UploadedFileWrapper();
+		this.categorie = new Categorie();
+		this.indice = false;
+		this.uf = new UploadedFileWrapper();
 	}
-	
-	public void init(){
-		catSession= (HttpSession) FacesContext. getCurrentInstance().getExternalContext().getSession(false);
-		
-		//Recuperer l'agent stocké dans la session
-		this.agent=(Agent) catSession.getAttribute("agentSession");
+
+	@PostConstruct
+	public void init() {
+		this.listeCategorie = categorieService.GetAllCategorie();
+		this.maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+
+		// Recuperer l'agent stocké dans la session
+		maSession.setAttribute("categorieListe", listeCategorie);
 	}
-	
-	//G+S
+
+	// G+S
 
 	public Categorie getCategorie() {
 		return categorie;
@@ -90,69 +94,66 @@ public class CategorieManageBean implements Serializable {
 	public void setUf(UploadedFile uf) {
 		this.uf = uf;
 	}
-	
-	//Methodes metiers
-	//=====================Ajouter une categorie================//
-	
-	public String ajouterCategorie () {
-		
+
+	// Methodes metiers
+	// =====================Ajouter une categorie================//
+
+	public String ajouterCategorie() {
+
 		this.categorie.setPhotoCat(this.uf.getContents());
-		
-					//Appel de la methode Service
-		Categorie catOut=categorieService.addCategorie(this.categorie);
-		
-		//Si l'id de la categorie est différent de zero mettre a jour la liste des categorie
-		if(catOut.getIdCategorie()!=0){
-			List<Categorie> listeCat=categorieService.GetAllCategorie();
-			catSession.setAttribute("categorieListe", listeCat);
-			
-			return "accueil";
-			
-		}else{
+
+		// Appel de la methode Service
+		Categorie catOut = categorieService.addCategorie(this.categorie);
+
+		// Si l'id de la categorie est différent de zero mettre a jour la liste
+		// des categorie
+		if (catOut.getIdCategorie() != 0) {
+			List<Categorie> listeCat = categorieService.GetAllCategorie();
+			maSession.setAttribute("categorieListe", listeCat);
+
+			return "listecategorie";
+
+		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ajout : echec"));
-			return "ajoutcategorie";
+			return "ajoutercategorie";
 		}
 	}
-	
-	public String supprimerCategorie(){
-		//=========================Supprimer categorie========================//
-		int verif=categorieService.deleteCategorie(this.categorie);
-		
-		if(verif!=0){
-			//Recup et mettre a jour la liste 
-			List<Categorie> listeCat=categorieService.GetAllCategorie();
-			catSession.setAttribute("categorieListe", listeCat);
-			
+
+	public String supprimerCategorie() {
+		// =========================Supprimer
+		// categorie========================//
+		int verif = categorieService.deleteCategorie(this.categorie);
+
+		if (verif != 0) {
+			// Recup et mettre a jour la liste
+			List<Categorie> listeCat = categorieService.GetAllCategorie();
+			maSession.setAttribute("categorieListe", listeCat);
+
 			return "listecategorie";
-		}else{
+		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Supp : echec"));
 			return "listecategorie";
 		}
 	}
-	
-	public void recherchecatparId(){
-		try{
-			this.categorie=categorieService.getCategorieById(this.categorie);
-			this.indice=true;
-		}catch(Exception ex){
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("cat not exist"));
+
+	public void recherchecatparId() {
+			Categorie catOut = categorieService.getCategorieById(this.categorie);
+			maSession.setAttribute("catSession", catOut);
+		
+	}
+
+	public String modifiercategorie() {
+		int verif = categorieService.updateCategorie(this.categorie);
+
+		if (verif != 0) {
+			// Recup et mettre a jour la liste
+			List<Categorie> listeCat = categorieService.GetAllCategorie();
+			maSession.setAttribute("categorieListe", listeCat);
+
+			return "accueil";
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Mod: echec"));
+			return "modifiercategorie";
 		}
 	}
-	
-	public String modifiercategorie(){
-		int verif = categorieService.updateCategorie(this.categorie);
-		
-		if(verif!=0){
-		//Recup et mettre a jour la liste 
-		List<Categorie> listeCat=categorieService.GetAllCategorie();
-		catSession.setAttribute("categorieListe", listeCat);
-		
-		return "accueil";
-	}else{
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Mod: echec"));
-		return "modifiercategorie";
-	}
-	}
 }
-	
-

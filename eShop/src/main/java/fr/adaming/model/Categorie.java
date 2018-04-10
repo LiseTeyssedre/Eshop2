@@ -35,10 +35,6 @@ public class Categorie implements Serializable {
 	@OneToMany(mappedBy="categorie")
 	private List<Produit> listeProduit;
 	
-	
-
-	
-
 	// Constructeurs
 	public Categorie() {
 		super();

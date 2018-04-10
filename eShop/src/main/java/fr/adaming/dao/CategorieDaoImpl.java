@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import fr.adaming.model.Categorie;
 
-
 @Repository
 public class CategorieDaoImpl implements ICategorieDao {
 
@@ -37,11 +36,11 @@ public class CategorieDaoImpl implements ICategorieDao {
 		Session s = sf.getCurrentSession();
 
 		Query query = s.createQuery(req);
-		
-		//Cela te permet de transformer ton tableau byte en image url
-		//"data:image/png;base64,"=format
-		List<Categorie> listecat=query.list();
-		for(Categorie cat:listecat){
+
+		// Cela te permet de transformer ton tableau byte en image url
+		// "data:image/png;base64,"=format
+		List<Categorie> listecat = query.list();
+		for (Categorie cat : listecat) {
 			cat.setImagecat("data:image/png;base64," + Base64.encodeBase64String(cat.getPhotoCat()));
 		}
 
@@ -65,9 +64,9 @@ public class CategorieDaoImpl implements ICategorieDao {
 		Session s = sf.getCurrentSession();
 
 		Query query = s.createQuery(req);
-		
-		query.setParameter("pNom",cat.getNomCategorie());
-		query.setParameter("pPhoto",cat.getPhotoCat());
+
+		query.setParameter("pNom", cat.getNomCategorie());
+		query.setParameter("pPhoto", cat.getPhotoCat());
 		query.setParameter("pDescription", cat.getDescription());
 		query.setParameter("pIdCat", cat.getIdCategorie());
 
@@ -77,25 +76,26 @@ public class CategorieDaoImpl implements ICategorieDao {
 	@Override
 	public int deleteCategorie(Categorie cat) {
 		Session s = sf.getCurrentSession();
-		//Creation de la requete
-		String req="DELETE FROM Catgorie AS cat WHERE cat.idCategorie=:pIdCat";
-		//Creation du query
-		Query query3=s.createQuery(req);
-		
+		// Creation de la requete
+		String req = "DELETE FROM Catgorie as cat WHERE cat.idCategorie=:pIdCat";
+		// Creation du query
+		Query query3 = s.createQuery(req);
+		query3.setParameter("pIdCat", cat.getIdCategorie());
+
 		return query3.executeUpdate();
 	}
 
 	@Override
 	public Categorie getCategorieById(Categorie cat) {
 		Session s = sf.getCurrentSession();
-		String req4="SELECT cat From Categorie WHERE cat.idCategorie=:pIdCat";
-		
-		//Creation du query
-		Query query4=s.createQuery(req4);
-		
-		//Passage des parametre
+		String req4 = "SELECT cat From Categorie WHERE cat.idCategorie=:pIdCat";
+
+		// Creation du query
+		Query query4 = s.createQuery(req4);
+
+		// Passage des parametre
 		query4.setParameter("pIdCat", cat.getIdCategorie());
-		
+
 		return (Categorie) query4.uniqueResult();
 	}
 

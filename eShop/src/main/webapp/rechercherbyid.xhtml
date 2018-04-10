@@ -7,23 +7,25 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-<title>pas d'accueil admin</title>
+	<title>pas d'accueil admin</title>
 </h:head>
 
 <h:body>
-<h:form>
-		<p:breadCrumb>
-			<p:menuitem value="Accueil" url="listecartegorie.xhtml" />
-			<p:menuitem value="Ajouter" url="#" />
-			<p:menuitem value="Supprimer" url="#" />
-			<p:menuitem value="Modifier" url="#" />
-			<p:menuitem value="Rechercher" url="#" />
 
-		</p:breadCrumb>
-	</h:form>
-	
 	<h:form>
-		<p:dataTable var="cat" value="#{sessionScope.categorieListe}">
+		<h:panelGrid columns="2">
+				ID categorie : <h:inputText value="#{catMB.categorie.idCategorie}" />
+			<p:commandButton value="Rechercher"
+				action="#{catMB.recherchecatparId}" />
+		</h:panelGrid>
+	</h:form>
+
+	<h:form>
+
+		<p:dataTable var="cat" value="#{sessionScope.catSession}">
+
+			<f:facet name="header">Catégorie</f:facet>
+
 			<p:column headerText="Id">
 				<h:outputText value="#{cat.idCategorie}" />
 			</p:column>
@@ -40,8 +42,8 @@
 				<h:graphicImage value="#{cat.imagecat}" />
 			</p:column>
 		</p:dataTable>
-	</h:form>
 
+	</h:form>
 </h:body>
 
 </html>
