@@ -16,6 +16,7 @@ accueil admin
 
 <h2>liste des clients</h2>
 
+<h:form>
 <p:dataTable var="cl" value="#{sessionScope.clientListe}">
     <p:column headerText="Id">
         <h:outputText value="#{cl.idClient}" />
@@ -36,6 +37,7 @@ accueil admin
         <h:outputText value="#{cl.tel}" />
     </p:column>
 </p:dataTable>
+</h:form>
 
 
 
