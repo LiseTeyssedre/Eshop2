@@ -1,0 +1,32 @@
+<!DOCTYPE html >
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+	<title>Page layout</title>
+</h:head>
+<h:body>
+
+	<!-- inclure le header -->
+	<ui:insert name="header">
+		<ui:include src="/template/header.xhtml"></ui:include>
+	</ui:insert>
+
+	<!-- inclure le body -->
+	<ui:insert name="body">
+		<ui:include src="/template/body.xhtml"></ui:include>
+	</ui:insert>
+
+
+	<!-- inclure le footer -->
+	<ui:insert name="footer">
+		<ui:include src="/template/footer.xhtml"></ui:include>
+	</ui:insert>
+
+</h:body>
+</html>
