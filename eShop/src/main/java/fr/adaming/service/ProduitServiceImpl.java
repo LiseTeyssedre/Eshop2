@@ -1,5 +1,6 @@
 package fr.adaming.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -61,4 +62,20 @@ public class ProduitServiceImpl implements IProduitService{
 		return prodDao.getProduitById(p);
 	}
 
+	public List<Produit> getProduitsRechService(String motCle){
+		
+		// recuperer la liste de tous les produits
+		List<Produit> listeProd = prodDao.getAllProduits();
+		// initialisation d'une liste de recuperation des produits dont la description contient le mot cle
+		List<Produit> listeRech = new ArrayList<Produit>();
+		for(Produit p : listeProd) {
+			if (p.getDescription().toLowerCase().contains(motCle.toLowerCase())) {
+				// si la description du produit contient le mot-cle on ajoute le produit dans la deuxieme liste
+				listeRech.add(p);
+			}
+		}
+		
+		return listeRech;
+	
+	}
 }

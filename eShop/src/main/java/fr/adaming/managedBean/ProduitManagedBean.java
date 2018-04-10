@@ -36,6 +36,8 @@ public class ProduitManagedBean implements Serializable {
 	private HttpSession maSession;
 	private UploadedFile uf;
 	private Categorie categorie;
+	private String motCle;
+	
 
 	// Constructeur vide
 	public ProduitManagedBean() {
@@ -90,6 +92,14 @@ public class ProduitManagedBean implements Serializable {
 
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
+	}
+
+	public String getMotCle() {
+		return motCle;
+	}
+
+	public void setMotCle(String motCle) {
+		this.motCle = motCle;
 	}
 
 	// Methodes metiers
@@ -154,5 +164,14 @@ public class ProduitManagedBean implements Serializable {
 		//mettre le produit dans la session
 		maSession.setAttribute("prodSession", pOut);
 		
+	}
+	
+	public String rechercherMotCle() {
+		List<Produit> listeRech = produitService.getProduitsRechService(motCle);
+		//ajouter la liste dans la session
+		maSession.setAttribute("rechListe", listeRech);
+
+		return "produitsRecherches.xhtml";
+
 	}
 }

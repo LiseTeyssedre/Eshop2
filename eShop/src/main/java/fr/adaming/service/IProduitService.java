@@ -18,4 +18,6 @@ public interface IProduitService {
 	public int deleteProduit(Produit p);
 
 	public Produit getProduitById(Produit p);
+	
+	public List<Produit> getProduitsRechService(String motCle);
 }

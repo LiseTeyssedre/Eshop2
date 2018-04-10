@@ -11,6 +11,18 @@
 
 <body>
 
-page accueil
+	page accueil
+
+	<h:form>
+		<h:panelGrid columns="3">
+			<h:graphicImage library="images" name="loupe.png"
+				style="height:50px; width:50px;" />
+
+			<h:inputText label="mot-clé" value="#{prodMB.motCle}" />
+			<h:commandButton value="Rechercher"
+				action="#{prodMB.rechercherMotCle}"/>
+		</h:panelGrid>
+	</h:form>
+	
 </body>
 </html>
