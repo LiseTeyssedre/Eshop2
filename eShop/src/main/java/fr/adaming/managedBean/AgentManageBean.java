@@ -15,6 +15,7 @@ import fr.adaming.model.Agent;
 import fr.adaming.model.Client;
 import fr.adaming.service.ClientServiceImpl;
 import fr.adaming.service.IAgentService;
+import fr.adaming.service.IClientService;
 
 @ManagedBean(name = "aMB")
 @RequestScoped
@@ -23,17 +24,33 @@ public class AgentManageBean implements Serializable {
 	// transformation de l'association UML en Java
 	@ManagedProperty(value = "#{aService}")
 	private IAgentService agentService;
+	
+	@ManagedProperty(value="#{clService}")
+	private IClientService clientService;
 
 	// le setter pour l'injection de dépendance
 	public void setAgentService(IAgentService agentService) {
 		this.agentService = agentService;
 	}
 
+	public void setClientService(IClientService clientService) {
+		this.clientService = clientService;
+	}
+
+
 	// Attributs
 	private Agent agent;
 	private List<Client> listeClient;
 	HttpSession maSession;
-
+	
+	// Init
+		@PostConstruct
+		public void init() {
+			maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+			maSession.setAttribute("agentSession", agent);
+			this.listeClient = clientService.getListClient();
+			maSession.setAttribute("clientListe", listeClient);
+		}
 	
 	// Constructeur vide
 	public AgentManageBean() {
@@ -63,12 +80,6 @@ public class AgentManageBean implements Serializable {
 		Agent aOut = agentService.isExist(this.agent);
 
 		if (aOut != null) {
-
-			// définir l'agent comme attribut de la session
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("agentSession", aOut);
-
-			//avoir la liste des clients dans la session 
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("clientList", this.listeClient);
 			
 			return "accueilAgent";
 		} else {
