@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
-  <display-name>eShop</display-name>
- 
- <!-- 0 déclarer un listener: afin de charger le context spring IoC -->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+	<display-name>eShop</display-name>
+
+	<!-- 0 déclarer un listener: afin de charger le context spring IoC -->
 	<listener>
-	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-		</listener>
-		
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
 	<!-- 1 Localisation du fichier de config du context spring IoC -->
-<context-param>
-<param-name>contextConfigLocation</param-name>
-<param-value>/WEB-INF/application-context.xml</param-value>
-</context-param>
-	
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/application-context.xml</param-value>
+	</context-param>
 
 
 	<!-- 2 Declaration de la servlet unique de jsf -->
@@ -35,13 +37,19 @@
 		<welcome-file>accueil.xhtml</welcome-file>
 	</welcome-file-list>
 
-<!-- specifier la phase du projet pour afficher les erreurs -->
-<context-param>
-<param-name>javax.faces.PROJECT_STAGE</param-name>
-<param-value>Development</param-value>
+	<!-- specifier la phase du projet pour afficher les erreurs -->
+	<context-param>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Development</param-value>
 
-</context-param>
- 
- 
- 
+	</context-param>
+
+
+	<!-- Charger le thème de Primefaces -->
+	<context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>hot-sneaks</param-value>
+	</context-param>
+
+
 </web-app>

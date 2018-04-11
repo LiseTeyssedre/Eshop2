@@ -3,10 +3,12 @@ body{
 	width: 1300px;
 	padding: 1em;
 	
-	
+	background-image: url(https://cdn.pixabay.com/photo/2016/05/29/23/27/focus-1424004_960_720.jpg);
+	background-repeat: no-repeat;
+	background-size: 100%;
 }
 
 .idLogo{
-	width:250px;
-	height:100px; 
+	width:500px;
+	height:225px; 
 }

@@ -1,0 +1,45 @@
+<!DOCTYPE html >
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+	<title>Page voirProduitCategorie</title>
+</h:head>
+<h:body>
+	<ui:composition template="/template/layout.xhtml">
+		<ui:define name="body">
+
+			<h:form>
+				<p:dataGrid var="prod" value="#{sessionScope.prodListe}" columns="4"
+					layout="grid" id="prod">
+
+					<f:facet name="header">
+				#{sessionScope.categ.nomCategorie}
+        	</f:facet>
+
+					<p:panel header="#{prod.designation}" style="text-align:center">
+						<h:panelGrid columns="1" style="width:100%">
+							<h:commandLink action="#{prodMB.afficherFicheProduit}">
+								<h:graphicImage value="#{prod.image}"
+									styleClass="imagesProduits" />
+								<f:setPropertyActionListener value="#{prod}"
+									target="#{prodMB.produit}" />
+							</h:commandLink>
+
+							<h:outputText value="#{prod.description}" />
+							<h:outputText value="#{prod.prix} €" style="font-weight: bold;" />
+						</h:panelGrid>
+					</p:panel>
+				</p:dataGrid>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+
+
+</h:body>
+</html>

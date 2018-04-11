@@ -174,4 +174,19 @@ public class ProduitManagedBean implements Serializable {
 		return "produitsRecherches.xhtml";
 
 	}
+	
+	public String afficherListeProduitsSpecifiques() {
+		// mettre a jour la liste des produits
+		List<Produit> liste = produitService.getAllProduitsByCat(categorie);
+		maSession.setAttribute("prodListe", liste);
+		//ajout de la categorie dans la session
+		maSession.setAttribute("categ", categorie);
+		return "voirProduitCategorie";
+	}
+	
+	public String afficherFicheProduit(){
+		//enregistrer le produit selectionné dans la session
+		maSession.setAttribute("produitSession", produit);
+		return "voirProduitSeul";
+	}
 }

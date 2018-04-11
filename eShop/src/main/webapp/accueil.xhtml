@@ -3,22 +3,45 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-<title>page d'accueil</title>
-<h:outputStylesheet library="css" name="monStyle.css" />
+	<title>page d'accueil</title>
+	<h:outputStylesheet library="css" name="monStyle.css" />
 </h:head>
 
 <h:body>
 
-	page accueil
+	
 	<ui:composition template="/template/layout.xhtml">
-		<ui:define name="body"> 
-			
+		<ui:define name="body">
+			<div>
+				<h:form>
+					<p:dataGrid var="cat" value="#{sessionScope.categorieListe}" columns="3"
+						layout="grid" id="categ">
+						<f:facet name="header" style="text-align:center">Categories</f:facet>
+						<p:panel header="#{cat.nomCategorie}" style="text-align:center">
+							<h:panelGrid columns="1" style="width:100%">
+								<h:commandLink
+									action="#{prodMB.afficherListeProduitsSpecifiques}">
+									<h:graphicImage value="#{cat.imagecat}"
+										style="height:166px;width:250px" />
+									<f:setPropertyActionListener value="#{cat}"
+										target="#{prodMB.categorie}" />
+								</h:commandLink>
+
+								<h:outputText value="#{cat.description}" />
+
+							</h:panelGrid>
+						</p:panel>
+					</p:dataGrid>
+				</h:form>
+			</div>
+			<div>
 				<h:form>
 					<h:panelGrid columns="3">
-						<h:graphicImage library="images" name="loupe.png"
+						<h:graphicImage library="images" name="loupe2.png"
 							style="height:50px; width:50px;" />
 
 						<h:inputText label="mot-clé" value="#{prodMB.motCle}" />
@@ -26,9 +49,9 @@
 							action="#{prodMB.rechercherMotCle}" />
 					</h:panelGrid>
 				</h:form>
-		 	
+			</div>
 		</ui:define>
-	</ui:composition> 
+	</ui:composition>
 
 </h:body>
 </html>
