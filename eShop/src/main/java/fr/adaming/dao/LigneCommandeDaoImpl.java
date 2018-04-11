@@ -56,7 +56,7 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao{
 	}
 
 	@Override
-	public LigneCommande deleteLigneCommande(LigneCommande lc) {
+	public int deleteLigneCommande(LigneCommande lc) {
 		
 		//requete HQL
 		String req="DELETE FROM LigneCommance WHERE lc.id=:pId";
@@ -69,7 +69,7 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao{
 		//Passage des paramètres
 		query.setParameter("pId", lc.getId());
 		
-		return (LigneCommande) query.uniqueResult();
+		return query.executeUpdate();
 	}
 
 }

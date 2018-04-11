@@ -32,7 +32,7 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService {
 	}
 
 	@Override
-	public LigneCommande deleteLigneCommande(LigneCommande lc) {
+	public int deleteLigneCommande(LigneCommande lc) {
 		
 		return ligneComm.deleteLigneCommande(lc);
 	}

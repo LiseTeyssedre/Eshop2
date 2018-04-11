@@ -11,7 +11,7 @@ public List<LigneCommande> getAllLigneCommande();
 	
 	public LigneCommande addLigneCommande(LigneCommande lc);
 	
-	public LigneCommande deleteLigneCommande(LigneCommande lc);
+	public int deleteLigneCommande(LigneCommande lc);
 
 
 }
