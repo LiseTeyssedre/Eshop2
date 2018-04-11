@@ -77,7 +77,7 @@ public class CategorieDaoImpl implements ICategorieDao {
 	public int deleteCategorie(Categorie cat) {
 		Session s = sf.getCurrentSession();
 		// Creation de la requete
-		String req = "DELETE FROM Catgorie as cat WHERE cat.idCategorie=:pIdCat";
+		String req = "DELETE FROM Categorie as cat WHERE cat.idCategorie=:pIdCat";
 		// Creation du query
 		Query query3 = s.createQuery(req);
 		query3.setParameter("pIdCat", cat.getIdCategorie());
@@ -88,15 +88,16 @@ public class CategorieDaoImpl implements ICategorieDao {
 	@Override
 	public Categorie getCategorieById(Categorie cat) {
 		Session s = sf.getCurrentSession();
-		String req4 = "SELECT cat From Categorie WHERE cat.idCategorie=:pIdCat";
+		String req4 = "From Categorie as cat WHERE cat.idCategorie=:pIdCat";
 
 		// Creation du query
 		Query query4 = s.createQuery(req4);
 
 		// Passage des parametre
 		query4.setParameter("pIdCat", cat.getIdCategorie());
-
-		return (Categorie) query4.uniqueResult();
+		Categorie cOut = (Categorie) query4.uniqueResult();
+		cOut.setImagecat("data:image/png;base64," + Base64.encodeBase64String(cOut.getPhotoCat()));
+		return cOut;
 	}
 
 }

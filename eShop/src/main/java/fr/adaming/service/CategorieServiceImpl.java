@@ -16,6 +16,12 @@ public class CategorieServiceImpl implements ICategorieService{
 	@Autowired//Association UML en java
 	ICategorieDao categorieDao;
 	
+	//setter pour l'injection de dependance
+	public void setCategorieDao(ICategorieDao categorieDao) {
+		this.categorieDao = categorieDao;
+	}
+
+	
 	@Override
 	public List<Categorie> GetAllCategorie() {
 		

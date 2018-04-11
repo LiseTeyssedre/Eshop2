@@ -96,8 +96,6 @@ public class Categorie implements Serializable {
 		this.listeProduit = listeProduit;
 	}
 
-	
-
 	public String getImagecat() {
 		return imagecat;
 	}

@@ -9,16 +9,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.view.facelets.FaceletContext;
 import javax.servlet.http.HttpSession;
-
-import org.omg.CORBA.PRIVATE_MEMBER;
 import org.primefaces.model.UploadedFile;
-import org.primefaces.model.UploadedFileWrapper;
-
-import fr.adaming.model.Agent;
 import fr.adaming.model.Categorie;
-import fr.adaming.model.Produit;
 import fr.adaming.service.ICategorieService;
 
 @ManagedBean(name = "catMB")
@@ -29,27 +22,19 @@ public class CategorieManageBean implements Serializable {
 	@ManagedProperty("#{catService}")
 	private ICategorieService categorieService;
 
-	// Guetter et Setter
-	public ICategorieService getCategorieService() {
-		return categorieService;
-	}
-
-	public void setCategorieService(ICategorieService categorieService) {
+	// Setter pour l'injection de dependance
+		public void setCategorieService(ICategorieService categorieService) {
 		this.categorieService = categorieService;
 	}
 
 	// Attribut du ManageBean
 	private Categorie categorie;
-	private Agent agent;
-	private boolean indice;
 	private UploadedFile uf;
 	private List<Categorie> listeCategorie;
 	private HttpSession maSession;
 
 	public CategorieManageBean() {
 		this.categorie = new Categorie();
-		this.indice = false;
-		this.uf = new UploadedFileWrapper();
 	}
 
 	@PostConstruct
@@ -71,20 +56,20 @@ public class CategorieManageBean implements Serializable {
 		this.categorie = categorie;
 	}
 
-	public Agent getAgent() {
-		return agent;
+	public List<Categorie> getListeCategorie() {
+		return listeCategorie;
 	}
 
-	public void setAgent(Agent agent) {
-		this.agent = agent;
+	public void setListeCategorie(List<Categorie> listeCategorie) {
+		this.listeCategorie = listeCategorie;
 	}
 
-	public boolean isIndice() {
-		return indice;
+	public HttpSession getMaSession() {
+		return maSession;
 	}
 
-	public void setIndice(boolean indice) {
-		this.indice = indice;
+	public void setMaSession(HttpSession maSession) {
+		this.maSession = maSession;
 	}
 
 	public UploadedFile getUf() {
@@ -136,10 +121,11 @@ public class CategorieManageBean implements Serializable {
 		}
 	}
 
-	public void recherchecatparId() {
-			Categorie catOut = categorieService.getCategorieById(this.categorie);
-			maSession.setAttribute("catSession", catOut);
-		
+	public String recherchecatparId() {
+		Categorie catOut = categorieService.getCategorieById(categorie);
+		//maSession.setAttribute("catSession", catOut);
+		this.categorie=catOut;
+		return "rechercherbyid.xhtml";
 	}
 
 	public String modifiercategorie() {
@@ -150,7 +136,7 @@ public class CategorieManageBean implements Serializable {
 			List<Categorie> listeCat = categorieService.GetAllCategorie();
 			maSession.setAttribute("categorieListe", listeCat);
 
-			return "accueil";
+			return "listecategorie";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Mod: echec"));
 			return "modifiercategorie";

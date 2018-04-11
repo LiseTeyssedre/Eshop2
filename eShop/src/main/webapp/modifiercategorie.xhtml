@@ -11,4 +11,17 @@
 </h:head>
 
 <h:body>
+<h:form enctype="multipart/form-data">
+
+		<h:panelGrid columns="2">
+			Id Produit: <h:inputText value="#{catMB.categorie.idCategorie}" />
+			Description: <h:inputText
+				value="#{catMB.categorie.description}" />
+			
+			Image: <p:fileUpload value="#{catMB.uf}" mode="simple"
+				skinSimple="true" />
+			<h:commandButton value="Modifier" action="#{catMB.modifiercategorie}" />
+		</h:panelGrid>
+	</h:form>
 </h:body>
+</html>
