@@ -59,6 +59,11 @@ public class ClientManageBean implements Serializable {
 	@ManagedProperty(value="#{prodService}")
 	private IProduitService produitService;
 	
+	//le setter de produit pour l'injection de dépendance
+	public void setProduitService(IProduitService produitService) {
+		this.produitService = produitService;
+	}
+	
 	// Attributs
 	private Client client;
 	private List<Client> listeClient;

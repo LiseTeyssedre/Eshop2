@@ -131,7 +131,7 @@ public class PanierManageBean implements Serializable {
 		int qtDispo = pOut.getQuantite();
 
 		// verifier que qt demandée<qt stock
-		if (this.quantite < qtDispo && this.quantite>0) {
+		if (this.quantite <= qtDispo && this.quantite>0) {
 			// creer une ligne de commande
 			LigneCommande lcIn = new LigneCommande();
 			lcIn.setProduit(pOut);
@@ -154,7 +154,7 @@ public class PanierManageBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage("vous pouvez commander entre 1 et " + qtDispo+" produits !"));
 			return "voirProduitSeul";
-		}
+		} 
 
 		// LigneCommande ligneComm =
 		// ligneCommService.addLigneCommande(this.lcom);
