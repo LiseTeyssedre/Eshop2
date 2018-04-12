@@ -17,7 +17,22 @@
 	<ui:composition template="/template/layout.xhtml">
 		<ui:define name="body">
 			<div style="background-color: hsla(180, 100%, 70%, 0.65);">
-				<div >
+				<div>
+					<h:panelGrid columns="2">
+						<br/><br/>
+						<h:form>
+							<h:panelGrid columns="3">
+								<h:graphicImage library="images" name="loupe2.png"
+									style="height:50px; width:50px;" />
+
+								<h:inputText label="mot-clé" value="#{prodMB.motCle}" />
+								<h:commandButton value="Rechercher"
+									action="#{prodMB.rechercherMotCle}" styleClass="myButton" />
+							</h:panelGrid>
+						</h:form>
+					</h:panelGrid>
+				</div>
+				<div>
 					<h:form>
 						<p:dataGrid var="cat" value="#{catMB.listeCategorie}" columns="3"
 							layout="grid" id="categ">
@@ -39,18 +54,7 @@
 						</p:dataGrid>
 					</h:form>
 				</div>
-				<div>
-					<h:form>
-						<h:panelGrid columns="3">
-							<h:graphicImage library="images" name="loupe2.png"
-								style="height:50px; width:50px;" />
 
-							<h:inputText label="mot-clé" value="#{prodMB.motCle}" />
-							<h:commandButton value="Rechercher"
-								action="#{prodMB.rechercherMotCle}" styleClass="myButton" />
-						</h:panelGrid>
-					</h:form>
-				</div>
 			</div>
 		</ui:define>
 	</ui:composition>
