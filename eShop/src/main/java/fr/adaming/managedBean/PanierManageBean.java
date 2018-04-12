@@ -130,7 +130,7 @@ public class PanierManageBean implements Serializable {
 		int qtDispo = pOut.getQuantite();
 
 		// verifier que qt demandée<qt stock
-		if (this.quantite < qtDispo) {
+		if (this.quantite < qtDispo && this.quantite>0) {
 			// creer une ligne de commande
 			LigneCommande lcIn = new LigneCommande();
 			lcIn.setProduit(pOut);
@@ -151,7 +151,7 @@ public class PanierManageBean implements Serializable {
 			return "panier";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage("la quantite maximale disponible est de: " + qtDispo));
+					new FacesMessage("vous pouvez commander entre 1 et " + qtDispo+" produits !"));
 			return "gestionProduits";
 		}
 

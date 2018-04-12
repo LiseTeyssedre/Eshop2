@@ -42,4 +42,15 @@ public class ClientServiceImpl implements IClientService {
 		return clientDao.getListClient();
 	}
 
+	@Override
+	public Client recupererClientService(Client cl) {
+		//chercher si le client existe dans la base de données
+		try{
+			Client clOut=clientDao.isExist(cl);
+			return clOut;
+		}catch (Exception e){
+		return clientDao.addClient(cl);
+		}
+	}
+
 }

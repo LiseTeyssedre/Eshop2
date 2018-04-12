@@ -12,4 +12,5 @@ public interface IClientService {
 	
 	public List<Client> getListClient();
 	
+	public Client recupererClientService(Client cl);
 }
