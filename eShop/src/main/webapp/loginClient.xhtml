@@ -11,14 +11,24 @@
 </h:head>
 <h:body>
 
-	<h:form>
+<ui:composition template="/template/layout.xhtml">
+		<ui:define name="body">
+			<h:form>
 		<p:panelGrid columns="2">
+		Nom Client : <h:inputText value="#{clMB.client.nomClient}"></h:inputText>
 Mail : <h:inputText value="#{clMB.client.email}"></h:inputText>
 Mot de Passe : <h:inputSecret value="#{clMB.client.mdp}"></h:inputSecret>
 			<h:commandButton value="Se Connecter" action="#{clMB.seConnecter}" />
 		</p:panelGrid>
 
 	</h:form>
+				<h:messages style="color:red" />
+		</ui:define>
+	</ui:composition>
+
+
+
+	
 
 
 

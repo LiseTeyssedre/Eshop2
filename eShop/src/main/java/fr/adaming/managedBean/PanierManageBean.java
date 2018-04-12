@@ -169,31 +169,33 @@ public class PanierManageBean implements Serializable {
 		// } else {
 		// return "accueil";
 		// }
-	}
+//	}
 
-	// SUPPRIMER LIGNE DE COMMANDE
-	public String supprimerLC() {
-		int verif = ligneCommService.deleteLigneCommande(this.lcom);
-		if (verif != 0) {
-			// récupérer la liste de ligne de commande
-			List<LigneCommande> listeLC = ligneCommService.getAllLigneCommande();
-			// mettre a jour la liste dans la session
-			maSession.setAttribute("lcomListe", listeLC);
-			return "panier";
-		} else {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage("la ligne de commande n'a pas été supprimé"));
-			return "panier";
-		}
+//	// SUPPRIMER LIGNE DE COMMANDE
+//	public String supprimerLC() {
+//		int verif = ligneCommService.deleteLigneCommande(this.lcom);
+//		if (verif != 0) {
+//			// récupérer la liste de ligne de commande
+//			List<LigneCommande> listeLC = ligneCommService.getAllLigneCommande();
+//			// mettre a jour la liste dans la session
+//			maSession.setAttribute("lcomListe", listeLC);
+//			return "panier";
+//		} else {
+//			FacesContext.getCurrentInstance().addMessage(null,
+//					new FacesMessage("la ligne de commande n'a pas été supprimé"));
+//			return "panier";
+//		}
 
 	}
 	
 	//ANNULER LE PANIER
 	public String annulerPanier(){
 		//vider la liste dans la session
-		maSession.setAttribute("lcomListe", null);
+		this.listeLC.clear();
+		maSession.setAttribute("lcomListe", listeLC);
+		this.montantTotal=0;
 		//remettre le montant total a zero dans la session
-		maSession.setAttribute("total", 0);
+		maSession.setAttribute("total", montantTotal);
 		return "accueil";
 	}
 	

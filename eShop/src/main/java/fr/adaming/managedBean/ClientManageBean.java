@@ -130,7 +130,7 @@ public class ClientManageBean implements Serializable {
 
 		if (clOut != null) {
 			
-			return "accueil";
+			return "espaceClient";
 		} else {
 
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("authentification échouée"));
@@ -149,7 +149,7 @@ public class ClientManageBean implements Serializable {
 			// l'envoyer dans la session
 			maSession.setAttribute("clientListe", listeClient);
 
-			return "accueil";
+			return "loginClient";
 		} else {
 			return "ajoutClient";
 		}
@@ -168,7 +168,7 @@ public class ClientManageBean implements Serializable {
 	
 	public String ValidePanier(){
 		
-		// recuperer l'ancien ou le nouveau client
+	// recuperer l'ancien ou le nouveau client
 				Client clOut = clientService.recupererClientService(client);
 				if (clOut != null){
 		
@@ -231,7 +231,7 @@ public class ClientManageBean implements Serializable {
 
 					MimeBodyPart messageBodyPart = new MimeBodyPart();
 					messageBodyPart.setContent(
-							"Bonjour,<br/>Vous trouverez en piède joint votre bon de commande. Vous recevrez votre colis dans les plus brefs délais."
+							"Bonjour,<br/>Vous trouverez en pièce jointe votre bon de commande. Vous recevrez votre colis dans les plus brefs délais."
 							+ "Merci de nous faire confiance !<br/><br/>Bien cordialement,<br/>Le service client, LiGwenDy.",
 							"text/html");
 

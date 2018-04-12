@@ -54,17 +54,18 @@
 
 
 				<h:form>
-					<h:panelGrid columns="2">
-						<h:commandButton value="Annuler" action="#{panMB.annulerPanier}"
-							styleClass="myButton" />
+				<h:panelGrid columns="2">
+					<h:commandButton value="Annuler" action="#{panMB.annulerPanier}"
+						styleClass="boutons" />
 
-						<h:button value="Valider" outcome="client.xhtml"
-							styleClass="myButton" />
+					<h:button value="Valider" outcome="accueilClient.xhtml"
+						styleClass="boutons" />
 
-						<h:button value="Retour" outcome="accueil.xhtml"
-							styleClass="myButton" />
-					</h:panelGrid>
-				</h:form>
+					<h:button value="Retour" outcome="accueil.xhtml"
+						styleClass="boutons" />
+				</h:panelGrid>
+			</h:form>
+
 
 				<h:messages style="color:red" />
 			</div>
