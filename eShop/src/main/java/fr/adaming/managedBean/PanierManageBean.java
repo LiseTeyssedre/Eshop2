@@ -10,6 +10,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -24,7 +25,7 @@ import fr.adaming.service.ILigneCommandeService;
 import fr.adaming.service.IProduitService;
 
 @ManagedBean(name = "panMB")
-@RequestScoped
+@SessionScoped
 public class PanierManageBean implements Serializable {
 
 	// transformation de l'association UML en java
@@ -152,7 +153,7 @@ public class PanierManageBean implements Serializable {
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage("vous pouvez commander entre 1 et " + qtDispo+" produits !"));
-			return "gestionProduits";
+			return "voirProduitSeul";
 		}
 
 		// LigneCommande ligneComm =

@@ -24,10 +24,6 @@ public class Agent implements Serializable{
 	private String mail;
 	private String mdp;
 	
-	//Transformation uml en java
-	@OneToMany(mappedBy="agent")
-	private List<Commande> listeCommande;
-	
 	
 	//Constructeurs
 	public Agent() {
@@ -65,13 +61,7 @@ public class Agent implements Serializable{
 		this.mdp = mdp;
 	}
 	
-	public List<Commande> getListeCommande() {
-		return listeCommande;
-	}
-	public void setListeCommande(List<Commande> listeCommande) {
-		this.listeCommande = listeCommande;
-	}
-	
+
 	
 	
 	
