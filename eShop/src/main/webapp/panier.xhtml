@@ -14,58 +14,60 @@
 
 	<ui:composition template="/template/layout.xhtml">
 		<ui:define name="body">
-			<h:form>
-				<p:dataTable var="lc" value="#{sessionScope.lcomListe}">
-					<f:facet name="header">Panier</f:facet>
-					<p:column headerText="Photo du produit">
-						<h:graphicImage value="#{lc.produit.image}" style="height:242px; width:200px"/>
-					</p:column>
+			<div style="background-color: hsla(180, 100%, 70%, 0.65);">
+				<h:form>
+					<p:dataTable var="lc" value="#{sessionScope.lcomListe}">
+						<f:facet name="header">Panier</f:facet>
+						<p:column headerText="Photo du produit">
+							<h:graphicImage value="#{lc.produit.image}"
+								style="height:195px; width:195px" />
+						</p:column>
 
-					<p:column headerText="Reference du produit">
-						<h:outputText value="#{lc.produit.designation}" />
-					</p:column>
-					<p:column headerText="Description du produit">
-						<h:outputText value="#{lc.produit.description}" />
-					</p:column>
-					<p:column headerText="Prix unitaire">
-						<h:outputText value="#{lc.produit.prix}" />
-					</p:column>
-					<p:column headerText="Quantite">
-						<p:cellEditor>
-							<f:facet name="output">
-								<h:outputText value="#{lc.quantite}" />
-							</f:facet>
-							<f:facet name="input">
-								<p:inputText value="#{lc.quantite}}" style="width:96%" />
-							</f:facet>
-						</p:cellEditor>
-					</p:column>
-					<p:column headerText="Montant">
-						<h:outputText value="#{lc.prix}" />
-					</p:column>
+						<p:column headerText="Reference du produit">
+							<h:outputText value="#{lc.produit.designation}" />
+						</p:column>
+						<p:column headerText="Description du produit">
+							<h:outputText value="#{lc.produit.description}" />
+						</p:column>
+						<p:column headerText="Prix unitaire">
+							<h:outputText value="#{lc.produit.prix}" />
+						</p:column>
+						<p:column headerText="Quantite">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{lc.quantite}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{lc.quantite}}" style="width:96%" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column headerText="Montant">
+							<h:outputText value="#{lc.prix}" />
+						</p:column>
 
-				</p:dataTable>
+					</p:dataTable>
 
-				<h1 align="right" style="color: #ff1a8c">Montant total:
-					#{sessionScope.total} €</h1>
-			</h:form>
+					<h1 align="right" style="color: #ff1a8c">Montant total:
+						#{sessionScope.total} €</h1>
+				</h:form>
 
 
-			<h:form>
-				<h:panelGrid columns="2">
-					<h:commandButton value="Annuler" action="#{panMB.annulerPanier}"
-						styleClass="boutons" />
+				<h:form>
+					<h:panelGrid columns="2">
+						<h:commandButton value="Annuler" action="#{panMB.annulerPanier}"
+							styleClass="myButton" />
 
-					<h:button value="Valider" outcome="client.xhtml"
-						styleClass="boutons" />
+						<h:button value="Valider" outcome="client.xhtml"
+							styleClass="myButton" />
 
-					<h:button value="Retour" outcome="accueil.xhtml"
-						styleClass="boutons" />
-				</h:panelGrid>
-			</h:form>
+						<h:button value="Retour" outcome="accueil.xhtml"
+							styleClass="myButton" />
+					</h:panelGrid>
+				</h:form>
 
-			<h:messages style="color:red" />
-
+				<h:messages style="color:red" />
+			</div>
 		</ui:define>
 	</ui:composition>
 </h:body>

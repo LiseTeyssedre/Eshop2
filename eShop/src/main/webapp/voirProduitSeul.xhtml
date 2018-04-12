@@ -13,34 +13,41 @@
 <h:body>
 	<ui:composition template="/template/layout.xhtml">
 		<ui:define name="body">
-			<h:form>
-				<h:panelGrid columns="3">
-					<br/>
-					<p:panelGrid columns="1" style="width:30%;margin:10px 0px">
-						<f:facet name="header">
-							<h:graphicImage value="#{prodMB.produit.image}" />
-						</f:facet>
+			<div style="background-color: hsla(180, 100%, 70%, 0.65);">
+
+
+
+				<div style="margin-left: 375px; text-align: center; font-size: 22px;">
+					<h:panelGrid columns="1">
+
+						<h:graphicImage value="#{prodMB.produit.image}"
+							style="width:600px;height:400px" />
+
 						<h:outputText value="#{prodMB.produit.designation}"
 							style="text-align:center" />
 						<h:outputText value="#{prodMB.produit.description}"
 							style="text-align:center" />
 						<h:outputText value="#{prodMB.produit.prix} €"
 							style="font-weight: bold;text-align:center" />
-					</p:panelGrid>
 
 
-					<h:panelGrid columns="2">
-				Quantite: <p:inputText value="#{panMB.quantite}" />
+
+						<h:form >
+							<h:panelGrid columns="2">
+								Quantite: <p:inputText value="#{panMB.quantite}" />
+							</h:panelGrid>
+
+							<p:commandButton value="Ajouter au panier"
+								action="#{panMB.ajouterLC}" styleClass="myButton" />
+
+
+
+						</h:form>
+
 					</h:panelGrid>
-
-					<p:commandButton value="Ajouter au panier"
-						action="#{panMB.ajouterLC}" styleClass="myButton" />
-
-					<br/>
-				</h:panelGrid>
-
-			</h:form>
-			<h:messages style="color:red" />
+				</div>
+				<h:messages style="color:red" />
+			</div>
 		</ui:define>
 	</ui:composition>
 
