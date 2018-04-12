@@ -38,10 +38,6 @@ public class Commande implements Serializable {
 	@OneToMany(mappedBy = "commande")
 	private List<LigneCommande> listelc;
 	
-	//association uml java avec agent
-	@ManyToOne
-	@JoinColumn(name="a_id", referencedColumnName="id_a")
-	private Agent agent;
 
 	// Constructeurs
 	public Commande() {
@@ -83,16 +79,6 @@ public class Commande implements Serializable {
 
 	public void setClient(Client client) {
 		this.client = client;
-	}
-
-
-
-	public Agent getAgent() {
-		return agent;
-	}
-
-	public void setAgent(Agent agent) {
-		this.agent = agent;
 	}
 
 	public List<LigneCommande> getListelc() {
