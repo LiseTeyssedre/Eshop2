@@ -13,42 +13,44 @@
 
 <h:body>
 
-	
+
 	<ui:composition template="/template/layout.xhtml">
 		<ui:define name="body">
-			<div>
-				<h:form>
-					<p:dataGrid var="cat" value="#{sessionScope.categorieListe}" columns="3"
-						layout="grid" id="categ">
-						<f:facet name="header" style="text-align:center">Categories</f:facet>
-						<p:panel header="#{cat.nomCategorie}" style="text-align:center">
-							<h:panelGrid columns="1" style="width:100%">
-								<h:commandLink
-									action="#{prodMB.afficherListeProduitsSpecifiques}">
-									<h:graphicImage value="#{cat.imagecat}"
-										style="height:166px;width:250px" />
-									<f:setPropertyActionListener value="#{cat}"
-										target="#{prodMB.categorie}" />
-								</h:commandLink>
+			<div style="background-color: hsla(180, 100%, 70%, 0.65);">
+				<div >
+					<h:form>
+						<p:dataGrid var="cat" value="#{catMB.listeCategorie}" columns="3"
+							layout="grid" id="categ">
+							<f:facet name="header" style="text-align:center">Categories</f:facet>
+							<p:panel header="#{cat.nomCategorie}" style="text-align:center">
+								<h:panelGrid columns="1" style="width:100%">
+									<h:commandLink
+										action="#{prodMB.afficherListeProduitsSpecifiques}">
+										<h:graphicImage value="#{cat.imagecat}"
+											style="height:166px;width:250px" />
+										<f:setPropertyActionListener value="#{cat}"
+											target="#{prodMB.categorie}" />
+									</h:commandLink>
 
-								<h:outputText value="#{cat.description}" />
+									<h:outputText value="#{cat.description}" />
 
-							</h:panelGrid>
-						</p:panel>
-					</p:dataGrid>
-				</h:form>
-			</div>
-			<div>
-				<h:form>
-					<h:panelGrid columns="3">
-						<h:graphicImage library="images" name="loupe2.png"
-							style="height:50px; width:50px;" />
+								</h:panelGrid>
+							</p:panel>
+						</p:dataGrid>
+					</h:form>
+				</div>
+				<div>
+					<h:form>
+						<h:panelGrid columns="3">
+							<h:graphicImage library="images" name="loupe2.png"
+								style="height:50px; width:50px;" />
 
-						<h:inputText label="mot-clé" value="#{prodMB.motCle}" />
-						<h:commandButton value="Rechercher"
-							action="#{prodMB.rechercherMotCle}" />
-					</h:panelGrid>
-				</h:form>
+							<h:inputText label="mot-clé" value="#{prodMB.motCle}" />
+							<h:commandButton value="Rechercher"
+								action="#{prodMB.rechercherMotCle}" styleClass="myButton" />
+						</h:panelGrid>
+					</h:form>
+				</div>
 			</div>
 		</ui:define>
 	</ui:composition>
