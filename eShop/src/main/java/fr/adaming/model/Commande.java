@@ -72,7 +72,6 @@ public class Commande implements Serializable {
 		this.dateCommande = dateCommande;
 	}
 
-	
 	public Client getClient() {
 		return client;
 	}
